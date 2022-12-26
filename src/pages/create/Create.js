@@ -1,7 +1,7 @@
 //styles
 import './Create.css'
 
-import { projectFirestore, timestamp } from '../../firebase/config'
+import { timestamp } from '../../firebase/config'
 import { useAuthContext } from '../../hooks/useAuthContext'
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
