@@ -1,15 +1,14 @@
 //styles
 import './Create.css'
 
-import { timestamp } from '../../firebase/config'
-
+import { projectFirestore, timestamp } from '../../firebase/config'
 import { useAuthContext } from '../../hooks/useAuthContext'
-
+import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-
 import Select from 'react-select'
-
 import { useCollection } from '../../hooks/useCollection'
+import { useFirestore } from '../../hooks/useFirestore'
+
 
 const categories = [
     { value: 'development', label: 'Development' },
@@ -19,9 +18,11 @@ const categories = [
 ]
 
 export default function Create() {
+const { addDocument, response } = useFirestore('projects')
 const { documents } = useCollection('users')
 const [users, setUsers] = useState([])
 const { user } = useAuthContext()
+const navigate = useNavigate()
 
 //form field values
 const [name, setName] = useState('')
@@ -41,7 +42,7 @@ if(documents) {
 }
 }, [documents])
 
-    const handleSubmit = (e) => {
+    const handleSubmit =  async (e) => {
         e.preventDefault()
         setFormError(null)
 
@@ -78,8 +79,19 @@ if(documents) {
             createdBy,
             assignedUsersList
         }
-
-        console.log(project)
+        
+        await addDocument(project)
+        if (!response.error) {
+            navigate('/')
+        }
+        //WHAT I TRIED TO ADD PROJECTS 
+/*         try {
+            await projectFirestore.collection('projects').add(project)
+            navigate('/')
+        } catch (err) {
+            console.log(err)
+        } */
+        
     }
 
     return (
