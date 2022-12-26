@@ -19,6 +19,7 @@ export default function ProjectComments() {
             createdAt: timestamp.fromDate(new Date()),
             id: uuidv4(),
         }
+        console.log(commentToAdd)
     } 
 
   return (
