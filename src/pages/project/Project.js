@@ -14,10 +14,11 @@ export default function Project() {
     if (!document) {
         return <div className="loading">Loading...</div>
     }
-
+    console.log(document)
     return (
         <div className="project-details">
             <h1>{document.name}</h1>
+            
         </div>
     )
 }
