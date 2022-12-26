@@ -58,14 +58,14 @@ if(documents) {
         const createdBy = {
             displayName: user.displayName,
             photoURL: user.photoURL,
-            id: user.id
+            id: user.uid
         }
 
         const assignedUsersList = assignedUsers.map((u) => {
             return {
                 displayName: u.value.displayName,
                 photoURL: u.value.photoURL,
-                id: u.value.uid
+                id: u.value.id
             }
         })
 
